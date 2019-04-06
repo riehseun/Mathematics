@@ -6,3 +6,7 @@ git
 github
 groovy
 nexus-jenkins-plugin
+ssh-slaves
+email-ext
+mailer
+htmlpublisher
