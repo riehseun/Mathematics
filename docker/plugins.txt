@@ -1,0 +1,8 @@
+ansicolor
+greenballs
+kubernetes
+blueocean
+git
+github
+groovy
+nexus-jenkins-plugin
