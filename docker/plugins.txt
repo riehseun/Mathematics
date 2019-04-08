@@ -10,3 +10,4 @@ ssh-slaves
 email-ext
 mailer
 htmlpublisher
+kubernetes-pipeline-steps
