@@ -1,29 +1,64 @@
+# apiVersion: extensions/v1beta1
+# kind: Deployment
+# metadata:
+#   name: jenkins
+#   namespace: jenkins
+# spec:
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: jenkins
+#     spec:
+#       containers:
+#         - name: jenkins
+#           image: riehseun/jenkins-master
+#           env:
+#             - name: JAVA_OPTS
+#               value: -Djenkins.install.runSetupWizard=false
+#           ports:
+#             - name: http-port
+#               containerPort: 8080
+#             - name: jnlp-port
+#               containerPort: 50000
+#           volumeMounts:
+#             - name: jenkins-home
+#               mountPath: /var/jenkins_home
+#       volumes:
+#         - name: jenkins-home
+#           emptyDir: {}
+
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: jenkins
-  namespace: jenkins
+  name: ingress-nginx
 spec:
   replicas: 1
   template:
-    metadata:
-      labels:
-        app: jenkins
-    spec:
-      containers:
-        - name: jenkins
-          image: riehseun/jenkins-master
-          env:
-            - name: JAVA_OPTS
-              value: -Djenkins.install.runSetupWizard=false
-          ports:
-            - name: http-port
-              containerPort: 8080
-            - name: jnlp-port
-              containerPort: 50000
-          volumeMounts:
-            - name: jenkins-home
-              mountPath: /var/jenkins_home
-      volumes:
-        - name: jenkins-home
-          emptyDir: {}
+   metadata:
+    labels:
+     app: ingress-nginx
+   spec:
+     containers:
+     - image: gcr.io/google_containers/nginx-ingress-controller:0.8.3
+       name: ingress-nginx
+       imagePullPolicy: Always
+       ports:
+       - name: http
+         containerPort: 80
+         protocol: TCP
+       - name: https
+         containerPort: 443
+         protocol: TCP
+       env:
+       - name: POD_NAME
+         valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+       - name: POD_NAMESPACE
+         valueFrom:
+           fieldRef:
+            fieldPath: metadata.namespace
+       args:
+        - /nginx-ingress-controller
+        - --default-backend-service=$(POD_NAMESPACE)/nginx-default-backend

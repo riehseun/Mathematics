@@ -1,27 +1,43 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: jenkins
+#   namespace: jenkins
+# spec:
+#   type: LoadBalancer
+#   ports:
+#     - port: 80
+#       targetPort: 8080
+#   selector:
+#     app: jenkins
+
+# ---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: jenkins-jnlp
+#   namespace: jenkins
+# spec:
+#   type: ClusterIP
+#   ports:
+#     - port: 50000
+#       targetPort: 50000
+#   selector:
+#     app: jenkins
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins
-  namespace: jenkins
+  name: ingress-nginx
 spec:
   type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 8080
   selector:
-    app: jenkins
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: jenkins-jnlp
-  namespace: jenkins
-spec:
-  type: ClusterIP
+    app: ingress-nginx
   ports:
-    - port: 50000
-      targetPort: 50000
-  selector:
-    app: jenkins
+  - name: http
+    port: 80
+    targetPort: http
+  - name: https
+    port: 443
+    targetPort: https
