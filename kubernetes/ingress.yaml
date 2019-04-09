@@ -1,3 +1,4 @@
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -10,7 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
   rules:
-  - host: jenkins.rieh.com
+  - host: jenkins.yourcompany.com
     http:
       paths:
       - backend:
