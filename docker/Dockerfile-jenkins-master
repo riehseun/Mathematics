@@ -6,9 +6,9 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 # add the admin user
-COPY /configs/users "$JENKINS_HOME"/users/
+# COPY /configs/users "$JENKINS_HOME"/users/
 
 # Add the main config file to the jenkins path
-COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
+# COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
 
 USER jenkins

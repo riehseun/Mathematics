@@ -12,3 +12,13 @@ mailer
 htmlpublisher
 kubernetes-pipeline-steps
 config-file-provider
+analysis-core
+antisamy-markup-formatter
+custom-tools-plugin
+command-launcher
+docker-plugin
+docker-java-api
+email-ext-template
+envinject
+extended-choice-parameter
+extended-read-permission
