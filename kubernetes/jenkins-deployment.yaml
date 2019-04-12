@@ -12,6 +12,7 @@ spec:
       containers:
         - name: jenkins-master-image
           image: riehseun/jenkins-master
+          imagePullPolicy: "Always" # I want to use latest image all the time!
           env:
             - name: JAVA_OPTS
               value: -Djenkins.install.runSetupWizard=false
