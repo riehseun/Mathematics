@@ -11,3 +11,4 @@ email-ext
 mailer
 htmlpublisher
 kubernetes-pipeline-steps
+config-file-provider
