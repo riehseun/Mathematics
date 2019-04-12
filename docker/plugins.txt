@@ -21,4 +21,3 @@ docker-java-api
 email-ext-template
 envinject
 extended-choice-parameter
-extended-read-permission
