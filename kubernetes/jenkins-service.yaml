@@ -39,5 +39,8 @@ spec:
     - port: 8080
       nodePort: 30000
       protocol: TCP
+    - port: 50000
+      targetPort: 50000
+      protocol: TCP
   selector:
     app: jenkins
