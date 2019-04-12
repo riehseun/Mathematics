@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: jenkins
+  name: jenkins-master
 spec:
   replicas: 1
   template:
@@ -10,7 +10,7 @@ spec:
         app: jenkins
     spec:
       containers:
-        - name: jenkins
+        - name: jenkins-master-image
           image: riehseun/jenkins-master
           env:
             - name: JAVA_OPTS
