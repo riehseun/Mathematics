@@ -24,16 +24,20 @@
 #   selector:
 #     app: jenkins
 
+# ClusterIP: Stable internal cluster IP
+# LoadBalancer: Integrates NodePort with cloud-based load balancers
+# NodePort: exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
 apiVersion: v1
 kind: Service
 metadata:
   name: jenkins-svc
   labels:
-    app: jenkins-master
+    app: jenkins
 spec:
-  type: NodePort
+  type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
   ports:
     - port: 8080
+      nodePort: 30000
       protocol: TCP
   selector:
-    app: jenkins-master
+    app: jenkins
