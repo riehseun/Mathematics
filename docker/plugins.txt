@@ -32,5 +32,6 @@ maven-plugin
 pipeline-stage-view
 pipeline-utility-steps
 pipeline-rest-api
+pipeline-multibranch-defaults
 role-strategy
 workflow-aggregator
