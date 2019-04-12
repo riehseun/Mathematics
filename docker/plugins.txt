@@ -22,3 +22,15 @@ emailext-template
 envinject
 extended-choice-parameter
 extended-read-permission
+http_request
+ivy
+job-dsl
+jobConfigHistory
+jquery
+lockable-resources
+maven-plugin
+pipeline-stage-view
+pipeline-utility-steps
+pipeline-rest-api
+role-strategy
+workflow-appregator
