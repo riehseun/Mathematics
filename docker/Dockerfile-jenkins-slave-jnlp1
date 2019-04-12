@@ -3,5 +3,3 @@ FROM jenkins/jnlp-slave
 COPY empty-test-file /jenkins-slave1
 
 ENTRYPOINT ["jenkins-slave"]
-
-
