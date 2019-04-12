@@ -1,8 +1,8 @@
 #!/bin/bash
+# sed -i.bak 's/\r$//' k8s.sh
 kubectl create -f jenkins-deployment.yaml
 kubectl create -f jenkins-service.yaml
 kubectl describe pods
 kubectl cluster-info
 kubectl get service
 kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts:default
-
