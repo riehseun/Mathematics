@@ -33,4 +33,4 @@ pipeline-stage-view
 pipeline-utility-steps
 pipeline-rest-api
 role-strategy
-workflow-appregator
+workflow-aggregator
