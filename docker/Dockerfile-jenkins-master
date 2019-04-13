@@ -21,7 +21,7 @@ RUN mkdir -p "$JENKINS_HOME"/workspace/${job-1}
 RUN mkdir -p "$JENKINS_HOME"/jobs/${job-1}
 
 # Add the custom configs to the container
-COPY /configs/${job-1}-config.xml "$JENKINS_HOME"/jobs/${job-1}/config.xml
+COPY /configs/${job-1} "$JENKINS_HOME"/jobs/${job-1}/config.xml
 
 # Create build file structure
 #RUN mkdir -p "$JENKINS_HOME"/jobs/${job-1}/latest/
