@@ -13,7 +13,6 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
 RUN mkdir -p $JENKINS_HOME
 RUN chown ${uid}:${gid} $JENKINS_HOME
-RUN chmod -R 755 $JENKINS_HOME
 
 VOLUME $JENKINS_HOME
 
@@ -39,6 +38,8 @@ RUN mkdir -p "$JENKINS_HOME"/workspace/${job_name_1}
 
 # Create the jobs folder recursively
 RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
+
+RUN chmod -R 755 $JENKINS_HOME/jobs/${job_name_1}
 
 # Add the custom configs to the container
 COPY /config/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
