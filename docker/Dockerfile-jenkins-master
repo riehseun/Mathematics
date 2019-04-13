@@ -13,7 +13,7 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
 RUN mkdir -p $JENKINS_HOME \
   && chown ${uid}:${gid} $JENKINS_HOME \
-  && groupadd -g ${gid} ${group} \
+# && groupadd -g ${gid} ${group} \
   && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 VOLUME $JENKINS_HOME
