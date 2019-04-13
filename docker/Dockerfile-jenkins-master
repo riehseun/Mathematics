@@ -12,21 +12,21 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 # COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
 
 # Name the jobs
-ARG job_name_1="seed-job"
+#ARG job_name_1="seed-job"
 
 # Create the job workspaces
-RUN mkdir -p "$JENKINS_HOME"/workspace/${job_name_1}
+#RUN mkdir -p "$JENKINS_HOME"/workspace/${job_name_1}
 
 # Create the jobs folder recursively
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
+#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
 
 # Add the custom configs to the container
-COPY /configs/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
+#COPY /configs/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
 
 # Create build file structure
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
+#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
 
 # Create build file structure
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_2}/latest/
+#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_2}/latest/
 
 USER jenkins
