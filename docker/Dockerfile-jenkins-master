@@ -13,6 +13,7 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
 RUN mkdir -p $JENKINS_HOME
 RUN chown ${uid}:${gid} $JENKINS_HOME
+RUN chmod 755 $JENKINS_HOME
 
 VOLUME $JENKINS_HOME
 
@@ -43,7 +44,6 @@ RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
 COPY /config/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
 
 # Create build file structure
-RUN chown ${uid} "$JENKINS_HOME"/jobs/${job_name_1}/latest/
 RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
 RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
 
