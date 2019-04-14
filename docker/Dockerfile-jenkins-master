@@ -1,7 +1,5 @@
 FROM jenkins/jenkins:lts
 
-USER root
-
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
@@ -13,8 +11,11 @@ ARG JENKINS_HOME=/var/jenkins_home
 ENV JENKINS_HOME $JENKINS_HOME
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
+USER root
+
 RUN mkdir -p $JENKINS_HOME
-RUN chown -R ${uid}:${gid} $JENKINS_HOME
+RUN chown -R ${user}:${group} $JENKINS_HOME
+RUN chmod -R 755 $JENKINS_HOME
 
 VOLUME $JENKINS_HOME
 
@@ -24,13 +25,13 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
+USER ${user}
+
 # add the admin user
 # COPY /config/users "$JENKINS_HOME"/users/
 
 # Add the main config file to the jenkins path
 # COPY /config/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
-
-# USER ${user}
 
 # Name the jobs
 ARG job_name_1="seed-job"
