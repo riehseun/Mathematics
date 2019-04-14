@@ -46,8 +46,8 @@ RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
 COPY /config/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
 
 # Create build file structure
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
+#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
+#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
 
 # Set number of executors in Jenkins master
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
