@@ -28,10 +28,10 @@ EXPOSE ${agent_port}
 USER ${user}
 
 # add the admin user
-# COPY /config/users "$JENKINS_HOME"/users/
+# COPY /configs/users "$JENKINS_HOME"/users/
 
 # Add the main config file to the jenkins path
-# COPY /config/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
+# COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
 
 # Name the jobs
 ARG job_name_1="seed-job"
@@ -43,11 +43,14 @@ RUN mkdir -p "$JENKINS_HOME"/workspace/${job_name_1}
 RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
 
 # Add the custom configs to the container
-COPY /config/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
+COPY /configs/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
 
 # Create build file structure
-#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
-#RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
+USER root
+RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
+RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
+RUN chown -R ${user}:${group} "$JENKINS_HOME"/jobs/${job_name_1}
+USER ${user}
 
 # Set number of executors in Jenkins master
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
