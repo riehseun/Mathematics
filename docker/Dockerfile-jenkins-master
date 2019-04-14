@@ -12,7 +12,7 @@ ENV JENKINS_HOME $JENKINS_HOME
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
 RUN mkdir -p $JENKINS_HOME
-RUN chown ${uid}:${gid} $JENKINS_HOME
+RUN chown -R ${uid}:${gid} $JENKINS_HOME
 
 VOLUME $JENKINS_HOME
 
@@ -21,6 +21,8 @@ EXPOSE ${http_port}
 
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
+
+USER ${user}
 
 # add the admin user
 # COPY /config/users "$JENKINS_HOME"/users/
@@ -50,5 +52,3 @@ COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 # install plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
-USER ${user}
