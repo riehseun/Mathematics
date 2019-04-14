@@ -34,23 +34,23 @@ USER ${user}
 # COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
 
 # Name the jobs
-ARG job_name_1="seed-job"
+# ARG job_name_1="seed-job"
 
 # Create the job workspaces
-RUN mkdir -p "$JENKINS_HOME"/workspace/${job_name_1}
+# RUN mkdir -p "$JENKINS_HOME"/workspace/${job_name_1}
 
 # Create the jobs folder recursively
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
+# RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}
 
 # Add the custom configs to the container
-COPY /configs/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
+# COPY /configs/${job_name_1}_config.xml "$JENKINS_HOME"/jobs/${job_name_1}/config.xml
 
 # Create build file structure
-USER root
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
-RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
-RUN chown -R ${user}:${group} "$JENKINS_HOME"/jobs/${job_name_1}
-USER ${user}
+# USER root
+# RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/latest/
+# RUN mkdir -p "$JENKINS_HOME"/jobs/${job_name_1}/builds/1/
+# RUN chown -R ${user}:${group} "$JENKINS_HOME"/jobs/${job_name_1}
+# USER ${user}
 
 # Set number of executors in Jenkins master
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
