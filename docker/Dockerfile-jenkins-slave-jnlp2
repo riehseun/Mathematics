@@ -1,7 +1,0 @@
-FROM jenkins/jnlp-slave
-
-COPY empty-test-file /jenkins-slave2
-
-ENTRYPOINT ["jenkins-slave"]
-
-
