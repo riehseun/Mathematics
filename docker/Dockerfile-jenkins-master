@@ -30,7 +30,7 @@ EXPOSE ${agent_port}
 # Add the main config file to the jenkins path
 # COPY /config/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
 
-USER ${user}
+# USER ${user}
 
 # Name the jobs
 ARG job_name_1="seed-job"
