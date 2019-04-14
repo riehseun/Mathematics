@@ -1,5 +1,7 @@
 FROM jenkins/jenkins:lts
 
+USER root
+
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
@@ -22,13 +24,13 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
-USER ${user}
-
 # add the admin user
 # COPY /config/users "$JENKINS_HOME"/users/
 
 # Add the main config file to the jenkins path
 # COPY /config/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
+
+USER ${user}
 
 # Name the jobs
 ARG job_name_1="seed-job"
