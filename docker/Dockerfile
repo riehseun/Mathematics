@@ -25,7 +25,7 @@ EXPOSE ${http_port}
 # will be used by attached slave agents:
 EXPOSE ${agent_port}
 
-USER ${user}
+# USER ${user}
 
 # add the admin user
 # COPY /configs/users "$JENKINS_HOME"/users/
