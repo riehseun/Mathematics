@@ -53,7 +53,7 @@ EXPOSE ${agent_port}
 # USER ${user}
 
 # Add the main config file to the jenkins path
-COPY /configs/config.xml "$JENKINS_HOME"/config.xml
+COPY /configs/config.xml $JENKINS_HOME/config.xml
 
 # Set number of executors in Jenkins master
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
