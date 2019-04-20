@@ -52,6 +52,9 @@ EXPOSE ${agent_port}
 # RUN chown -R ${user}:${group} "$JENKINS_HOME"/jobs/${job_name_1}
 # USER ${user}
 
+# Add the main config file to the jenkins path
+COPY /configs/config.xml "$JENKINS_HOME"/config.xml
+
 # Set number of executors in Jenkins master
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 
