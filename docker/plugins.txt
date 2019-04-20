@@ -36,3 +36,4 @@ pipeline-multibranch-defaults
 role-strategy
 workflow-aggregator
 hashicorp-vault-plugin
+pipeline-github-lib
