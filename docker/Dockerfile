@@ -1,5 +1,7 @@
 FROM jenkins/jenkins:lts
 
+LABEL maintainer="seungmoon.rieh@gmail.com"
+
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
