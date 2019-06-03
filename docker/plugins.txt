@@ -38,3 +38,4 @@ workflow-aggregator
 hashicorp-vault-plugin
 pipeline-github-lib
 configuration-as-code
+ssh-agent
