@@ -22,10 +22,7 @@ kubectl apply -f jenkins-deployment.yaml
 kubectl apply -f jenkins-service.yaml
 kubectl apply -f jenkins-ingress.yaml
 
+# find IP address of the application
+kubectl get ingress
+
 # Wait about 10 mins until application comes up
-
-# kubectl delete ingress jenkins-ingress
-
-# gcloud compute addresses delete jenkins-master --global
-
-# gcloud container clusters delete k8s
