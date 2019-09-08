@@ -2,30 +2,30 @@ FROM jenkins/jenkins:lts
 
 LABEL maintainer="seungmoon.rieh@gmail.com"
 
-ARG user=jenkins
-ARG group=jenkins
-ARG uid=1000
-ARG gid=1000
-ARG http_port=8080
-ARG agent_port=50000
-ARG JENKINS_HOME=/var/jenkins_home
+# ARG user=jenkins
+# ARG group=jenkins
+# ARG uid=1000
+# ARG gid=1000
+# ARG http_port=8080
+# ARG agent_port=50000
+# ARG JENKINS_HOME=/var/jenkins_home
 
-ENV JENKINS_HOME $JENKINS_HOME
-ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
+# ENV JENKINS_HOME $JENKINS_HOME
+# ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
-USER root
+# USER root
 
-RUN mkdir -p $JENKINS_HOME
-RUN chown -R ${user}:${group} $JENKINS_HOME
-RUN chmod -R 755 $JENKINS_HOME
+# RUN mkdir -p $JENKINS_HOME
+# RUN chown -R ${user}:${group} $JENKINS_HOME
+# RUN chmod -R 755 $JENKINS_HOME
 
-VOLUME $JENKINS_HOME
+# VOLUME $JENKINS_HOME
 
 # for main web interface:
-EXPOSE ${http_port}
+# EXPOSE ${http_port}
 
 # will be used by attached slave agents:
-EXPOSE ${agent_port}
+# EXPOSE ${agent_port}
 
 # USER ${user}
 
@@ -55,13 +55,14 @@ EXPOSE ${agent_port}
 # USER ${user}
 
 # Add the main config file to the jenkins path
-COPY /configs/config.xml $JENKINS_HOME/config.xml
+# COPY /configs/config.xml $JENKINS_HOME/config.xml
 
 # Set number of executors in Jenkins master
-COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
+# COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 
+# Skip initial setup
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 # install plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
 ENV CASC_JENKINS_CONFIG https://raw.githubusercontent.com/CodeBabel/JCasC-Demo/master/Jenkins-JCasC
