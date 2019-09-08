@@ -63,3 +63,5 @@ COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 # install plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+ENV CASC_JENKINS_CONFIG https://raw.githubusercontent.com/CodeBabel/JCasC-Demo/master/Jenkins-JCasC
