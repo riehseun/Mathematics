@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: jenkins-master
+  namespace: default
 spec:
   replicas: 1
   template:
@@ -19,8 +20,10 @@ spec:
           ports:
             - name: http-port
               containerPort: 8080
+              protocol: TCP
             - name: jnlp-port
               containerPort: 50000
+              protocol: TCP
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
