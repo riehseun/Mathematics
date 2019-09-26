@@ -32,7 +32,7 @@ LABEL maintainer="seungmoon.rieh@gmail.com"
 # add the admin user
 # COPY /configs/users "$JENKINS_HOME"/users/
 
-# Add the main config file to the jenkins path
+# Add the main config file to the jenkins pat
 # COPY /configs/jenkins_home_config.xml "$JENKINS_HOME"/config.xml
 
 # Name the jobs
@@ -65,4 +65,4 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 # install plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-ENV CASC_JENKINS_CONFIG https://raw.githubusercontent.com/CodeBabel/JCasC-Demo/master/Jenkins-JCasC
+# ENV CASC_JENKINS_CONFIG https://raw.githubusercontent.com/CodeBabel/JCasC-Demo/master/Jenkins-JCasC
