@@ -5,6 +5,8 @@
  # Copy local files into directories inside container
  kubectl cp config.xml $POD:/var/jenkins_home/config.xml
  kubectl cp org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml $POD:/var/jenkins_home/org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml
+ kubectl cp org.jenkinsci.plugins.configfiles.GlobalConfigFiles.xml $POD:/var/jenkins_home/org.jenkinsci.plugins.configfiles.GlobalConfigFiles.xml
+
  IP=$(kubectl get ingress | awk '{print $3}' | tail -n 1)
  wget http://$IP/restart
  #kubectl exec -it $POD -- /bin/bash

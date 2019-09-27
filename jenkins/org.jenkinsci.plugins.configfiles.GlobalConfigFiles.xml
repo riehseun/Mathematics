@@ -1,0 +1,14 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jenkinsci.plugins.configfiles.GlobalConfigFiles plugin="config-file-provider@3.6.2">
+  <configs class="sorted-set">
+    <comparator class="org.jenkinsci.plugins.configfiles.GlobalConfigFiles$1"/>
+    <org.jenkinsci.plugins.configfiles.groovy.GroovyScript>
+      <id>Jenkinsfile</id>
+      <name>Jenkinsfile</name>
+      <comment>Jenkinsfile</comment>
+      <content>@Library(value=&apos;jenkins-pipeline@master&apos;, changelog=false)_
+mainMethod()</content>
+      <providerId>org.jenkinsci.plugins.configfiles.groovy.GroovyScript</providerId>
+    </org.jenkinsci.plugins.configfiles.groovy.GroovyScript>
+  </configs>
+</org.jenkinsci.plugins.configfiles.GlobalConfigFiles>
