@@ -8,6 +8,10 @@ kubectl cp org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml $POD:/var/jen
 kubectl cp org.jenkinsci.plugins.configfiles.GlobalConfigFiles.xml $POD:/var/jenkins_home/org.jenkinsci.plugins.configfiles.GlobalConfigFiles.xml
 
 IP=$(kubectl get ingress | awk '{print $3}' | tail -n 1)
+
+# Restart Jenkins
 wget http://$IP/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://$IP/restart
- #kubectl exec -it $POD -- /bin/bash
+rm -f jenkins-cli.jar
+
+#kubectl exec -it $POD -- /bin/bash
