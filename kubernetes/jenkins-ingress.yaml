@@ -3,8 +3,20 @@ kind: Ingress
 metadata:
   name: jenkins-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: jenkins-master
+    kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
 spec:
   backend:
     serviceName: jenkins-svc
     servicePort: 8080
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /*
+#         backend:
+#           serviceName: jenkins-svc
+#           servicePort: 8080
+#       - path: /v2/*
+#         backend:
+#           serviceName: jenkins-svc2
+#           servicePort: 8080
