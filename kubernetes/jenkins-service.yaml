@@ -1,6 +1,5 @@
 # ClusterIP: Stable internal cluster IP
 # LoadBalancer: Integrates NodePort with cloud-based load balancers
-# NodePort: exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
 apiVersion: v1
 kind: Service
 metadata:
