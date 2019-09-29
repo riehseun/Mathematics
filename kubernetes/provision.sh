@@ -16,7 +16,7 @@
 gcloud container clusters create k8s
 
 # Reverve static IP for "jenkins-master" application
-#gcloud compute addresses create jenkins-master --global
+gcloud compute addresses create jenkins-master --global
 
 kubectl apply -f jenkins-deployment.yaml
 kubectl apply -f jenkins-service.yaml
