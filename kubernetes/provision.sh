@@ -20,11 +20,11 @@ gcloud compute addresses create jenkins-master --global
 
 # NGINX Ingress Controller setup
 # Initialize current user as a cluster-admin
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account) --set controller.publishService.enabled=true
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account) --watch-namespace
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml
 # Verify installation
-kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
+# kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
 
 kubectl apply -f jenkins-deployment.yaml
 kubectl apply -f jenkins-service.yaml
