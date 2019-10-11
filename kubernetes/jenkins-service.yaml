@@ -6,15 +6,15 @@ metadata:
   name: jenkins-svc
   namespace: default
 spec:
-  type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
   ports:
     - port: 8080
+      protocol: TCP
       targetPort: 8080
-      protocol: TCP
-      name: http
-    - port: 50000
-      targetPort: 50000
-      protocol: TCP
-      name: slave
+    #   name: http
+    # - port: 50000
+    #   targetPort: 50000
+    #   protocol: TCP
+    #   name: slave
   selector:
     run: jenkins-svc
+  type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
