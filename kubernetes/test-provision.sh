@@ -1,5 +1,5 @@
 #!/bin/bash
-gcloud container clusters create k8s --addons=HttpLoadBalancing
+gcloud container clusters create k8s
 
 # Reverve static IP for "jenkins-master" application
 #gcloud compute addresses create web-static-ip --global

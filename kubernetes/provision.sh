@@ -13,7 +13,7 @@
 
 # Load balancer and static IP
 
-gcloud container clusters create k8s
+gcloud container clusters create k8s --addons=HttpLoadBalancing
 
 # Reverve static IP for "jenkins-master" application
 gcloud compute addresses create jenkins-master --global
