@@ -13,7 +13,7 @@
 
 # Load balancer and static IP
 
-gcloud container clusters create k8s --addons=HttpLoadBalancing
+gcloud container clusters create k8s
 
 # Reverve static IP for "jenkins-master" application
 gcloud compute addresses create jenkins-master --global
@@ -26,9 +26,9 @@ gcloud compute addresses create jenkins-master --global
 # Verify installation
 # kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
 
-kubectl apply -f jenkins-deployment.yaml
-kubectl apply -f jenkins-service.yaml
 kubectl apply -f jenkins-ingress.yaml
+kubectl apply -f jenkins-service.yaml
+kubectl apply -f jenkins-deployment.yaml
 
 # find IP address of the application
 kubectl get ingress
