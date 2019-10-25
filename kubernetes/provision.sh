@@ -26,7 +26,7 @@ gcloud compute addresses create jenkins-master --global
 # Verify installation
 # kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
 
-kubectl apply -f jenkins-backendservice.yaml
+kubectl apply -f nginx-config.yaml
 kubectl apply -f jenkins-ingress.yaml
 kubectl apply -f jenkins-service.yaml
 kubectl apply -f jenkins-deployment.yaml
@@ -39,3 +39,7 @@ kubectl get ingress
 # Also check GCP -> Network Services -> Load balancing to see if there are existing services running
 
 # gcloud compute backend-services update k8s-be-31222--06a63a3d09be589c --timeout=60 --global
+
+# gcloud compute backend-services list
+
+# kubectl patch svc jenkins-svc -p '{"spec":{"externalTrafficPolicy":"Local"}}'
