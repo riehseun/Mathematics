@@ -34,3 +34,5 @@ kubectl apply -f jenkins-deployment.yaml
 kubectl get ingress
 
 # Wait about 10 mins until application comes up
+
+# Also check GCP -> Network Services -> Load balancing to see if there are existing services running
