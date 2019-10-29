@@ -25,9 +25,10 @@ spec:
               containerPort: 50000
               protocol: TCP
           # If for some reason you don't want to serve a 200 at '/' you can instead setup a readinessProbe and the Health Check with inherit the path from there
+          # Once you add the readinessProbe, pods will not be considered ready until they are serving healthy http traffic on the checked port.
           readinessProbe:
             httpGet:
-              path: /healthz
+              path: /
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
