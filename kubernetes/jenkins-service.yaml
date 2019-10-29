@@ -16,5 +16,5 @@ spec:
       protocol: TCP
       name: slave
   selector:
-    run: jenkins-svc
+    k8s-app: glbc
   type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
