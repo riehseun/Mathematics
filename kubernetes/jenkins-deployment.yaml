@@ -24,6 +24,13 @@ spec:
             - name: jnlp-port
               containerPort: 50000
               protocol: TCP
+          # If for some reason you don't want to serve a 200 at '/' you can instead setup a readinessProbe and the Health Check with inherit the path from there
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
