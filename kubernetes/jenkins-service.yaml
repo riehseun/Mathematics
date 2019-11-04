@@ -16,5 +16,5 @@ spec:
       targetPort: 50000
       protocol: TCP
       name: slave
-  # selector:
-  #   k8s-app: glbc
+  selector:
+    app: jenkins-master

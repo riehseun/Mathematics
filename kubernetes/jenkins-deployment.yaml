@@ -29,6 +29,9 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthy
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
