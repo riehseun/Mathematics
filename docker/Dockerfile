@@ -1,5 +1,5 @@
 #FROM jenkins/jenkins:lts
-FROM jenkins:2.190
+FROM jenkins:2.190.1
 
 LABEL maintainer="seungmoon.rieh@gmail.com"
 
