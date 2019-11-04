@@ -19,7 +19,7 @@ spec:
               value: -Djenkins.install.runSetupWizard=false
           ports:
             - name: http-port
-              containerPort: 8080
+              containerPort: 80
               protocol: TCP
             - name: jnlp-port
               containerPort: 50000
