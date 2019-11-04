@@ -6,6 +6,7 @@ metadata:
   name: jenkins-svc
   namespace: default
 spec:
+  type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
   ports:
     - port: 8080
       protocol: TCP
@@ -15,6 +16,5 @@ spec:
       targetPort: 50000
       protocol: TCP
       name: slave
-  selector:
-    k8s-app: glbc
-  type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
+  # selector:
+  #   k8s-app: glbc
