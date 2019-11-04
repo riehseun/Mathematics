@@ -28,8 +28,8 @@ spec:
           # Once you add the readinessProbe, pods will not be considered ready until they are serving healthy http traffic on the checked port.
           readinessProbe:
             httpGet:
-              path: /healthz
-              port: 8080
+              path: /
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
           volumeMounts:
