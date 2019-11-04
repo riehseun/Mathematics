@@ -11,10 +11,10 @@ spec:
       protocol: TCP
       targetPort: 8080
       name: http
-    # - port: 50000
-    #   targetPort: 50000
-    #   protocol: TCP
-    #   name: slave
-  # selector:
-  #   k8s-app: glbc
+    - port: 50000
+      targetPort: 50000
+      protocol: TCP
+      name: slave
+  selector:
+    k8s-app: glbc
   type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
