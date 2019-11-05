@@ -19,7 +19,7 @@ spec:
               value: -Djenkins.install.runSetupWizard=false
           ports:
             - name: http-port
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
             - name: jnlp-port
               containerPort: 50000
@@ -29,7 +29,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthz
-              port: 80
+              port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
           volumeMounts:

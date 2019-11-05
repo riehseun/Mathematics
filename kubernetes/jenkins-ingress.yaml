@@ -17,7 +17,7 @@ spec:
       - path: /
         backend:
           serviceName: jenkins-svc
-          servicePort: 80
+          servicePort: 8080
       # - path: /v2/*
       #   backend:
       #     serviceName: jenkins-svc2

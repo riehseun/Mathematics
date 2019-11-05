@@ -8,9 +8,9 @@ metadata:
 spec:
   type: NodePort # exposes the app outside of the cluster by adding a cluster-wide port on top of Cluster IP
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
       name: http
     - port: 50000
       targetPort: 50000
