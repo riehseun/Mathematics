@@ -4,8 +4,8 @@ metadata:
   name: jenkins-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
-#    nginx.org/keepalive-timeout: "650s"
-#    nginx.org/keepalive-requests: "10000s"
+    nginx.org/keepalive-timeout: "650s"
+    nginx.org/keepalive-requests: "10000s"
 # spec:
 #   backend:
 #     serviceName: jenkins-svc
