@@ -7,8 +7,9 @@ BS=$(gcloud compute backend-services list | awk '{print $1}' | tail -n 2)
 echo $BS
 
 for i in $BS
+do
 	echo $i
-end
+done
 
 # gcloud compute backend-services delete $BS
 
