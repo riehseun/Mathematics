@@ -37,6 +37,8 @@ kubectl get ingress
 
 # Also check GCP -> Network Services -> Load balancing to see if there are existing services running
 
+# Also check GCP -> Compute Engine -> Health Checks to see if there are existing services running
+
 # gcloud compute backend-services update k8s-be-31222--06a63a3d09be589c --timeout=60 --global
 
 # gcloud compute backend-services list
