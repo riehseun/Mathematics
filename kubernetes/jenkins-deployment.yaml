@@ -19,19 +19,19 @@ spec:
               value: -Djenkins.install.runSetupWizard=false
           ports:
             - name: http-port
-              containerPort: 8080
+              containerPort: 80
               protocol: TCP
             - name: jnlp-port
               containerPort: 50000
               protocol: TCP
           # If for some reason you don't want to serve a 200 at '/' you can instead setup a readinessProbe and the Health Check with inherit the path from there
           # Once you add the readinessProbe, pods will not be considered ready until they are serving healthy http traffic on the checked port.
-          # readinessProbe:
-          #   httpGet:
-          #     path: /healthz
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
