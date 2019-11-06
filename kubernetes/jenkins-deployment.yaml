@@ -19,7 +19,7 @@ spec:
               value: -Djenkins.install.runSetupWizard=false
           ports:
             - name: http-port
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
             - name: jnlp-port
               containerPort: 50000
@@ -28,7 +28,7 @@ spec:
           # Once you add the readinessProbe, pods will not be considered ready until they are serving healthy http traffic on the checked port.
           readinessProbe:
             httpGet:
-              path: /healthz
+              path: /login
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
