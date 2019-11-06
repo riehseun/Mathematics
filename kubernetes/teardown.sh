@@ -17,8 +17,10 @@ echo $FR
 
 # Remove health checks
 HC=$(gcloud compute health-checks list | awk '{print $1}' | tail -n 2)
-echo $HC
-#gcloud -q compute health-checks delete $HC
+for i in $HC; do
+	echo $i
+	#gcloud -q compute health-checks delete $HC
+done
 
 # Remove url maps
 UM=$(gcloud compute url-maps list | awk '{print $1}' | tail -n 1)
