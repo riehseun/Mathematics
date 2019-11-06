@@ -4,12 +4,14 @@ LB=$(gcloud compute url-maps list | awk '{print $1}' | tail -n 1)
 echo $LB
 
 BS=$(gcloud compute backend-services list | awk '{print $1}' | tail -n 2)
-echo $BS
 
-for i in $BS
-do
+for i in $BS; do
 	echo $i
+	#gcloud compute backend-services delete $i
 done
+
+FR=$(gcloud compute forwarding-rules list | awk '{print $1}' | tail -n 1)
+echo $FR
 
 # gcloud compute backend-services delete $BS
 
