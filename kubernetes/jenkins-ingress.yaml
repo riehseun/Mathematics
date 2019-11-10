@@ -6,18 +6,18 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
     nginx.org/keepalive-timeout: "650s"
     nginx.org/keepalive-requests: "10000s"
-# spec:
-#   backend:
-#     serviceName: jenkins-svc
-#     servicePort: 8080
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: jenkins-svc
-          servicePort: 80
+  backend:
+    serviceName: jenkins-svc
+    servicePort: 80
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: jenkins-svc
+#           servicePort: 80
       # - path: /v2/*
       #   backend:
       #     serviceName: jenkins-svc2
