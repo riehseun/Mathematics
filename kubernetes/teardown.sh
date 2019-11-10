@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Remove ingress
+kubectl delete ingress jenkins-ingress
+
 # Remove url maps
 UM=$(gcloud compute url-maps list | awk '{print $1}' | tail -n 1)
 echo "url map"
@@ -13,7 +16,7 @@ echo $FR
 gcloud -q compute backend-services delete $FR --global
 
 # Remove all backend services
-BS=$(gcloud compute backend-services list | awk '{print $1}' | tail -n 2)
+BS=$(gcloud compute backend-services list | awk '{print $1}' | tail -n 1)
 echo "backend services"
 for i in $BS; do
 	echo $i
@@ -21,7 +24,7 @@ for i in $BS; do
 done
 
 # Remove health checks
-HC=$(gcloud compute health-checks list | awk '{print $1}' | tail -n 2)
+HC=$(gcloud compute health-checks list | awk '{print $1}' | tail -n 1)
 echo "health checks"
 for i in $HC; do
 	echo $i
@@ -30,9 +33,6 @@ done
 
 # Remove static IP
 gcloud -q compute addresses delete jenkins-master --global
-
-# Remove ingress
-kubectl delete ingress jenkins-ingress
 
 # Remove cluster
 gcloud -q container clusters delete k8s
