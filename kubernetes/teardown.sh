@@ -3,6 +3,8 @@
 # Remove ingress
 kubectl delete ingress jenkins-ingress
 
+# Remove proxy
+
 # Remove url maps
 UM=$(gcloud compute url-maps list | awk '{print $1}' | tail -n 1)
 echo "url map"
