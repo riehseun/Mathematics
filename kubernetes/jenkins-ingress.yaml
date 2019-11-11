@@ -1,24 +1,34 @@
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: jenkins-ingress
+#   annotations:
+#     kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
+#     # nginx.org/keepalive-timeout: "650s"
+#     # nginx.org/keepalive-requests: "10000s"
+# spec:
+#   backend:
+#     serviceName: jenkins-svc
+#     servicePort: 80
+# # spec:
+# #   rules:
+# #   - http:
+# #       paths:
+# #       - path: /
+# #         backend:
+# #           serviceName: jenkins-svc
+# #           servicePort: 80
+#       # - path: /v2/*
+#       #   backend:
+#       #     serviceName: jenkins-svc2
+#       #     servicePort: 8080
+
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: jenkins-ingress
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
-    # nginx.org/keepalive-timeout: "650s"
-    # nginx.org/keepalive-requests: "10000s"
+  name: basic-ingress
 spec:
   backend:
-    serviceName: jenkins-svc
-    servicePort: 80
-# spec:
-#   rules:
-#   - http:
-#       paths:
-#       - path: /
-#         backend:
-#           serviceName: jenkins-svc
-#           servicePort: 80
-      # - path: /v2/*
-      #   backend:
-      #     serviceName: jenkins-svc2
-      #     servicePort: 8080
+    serviceName: web
+    servicePort: 8080
