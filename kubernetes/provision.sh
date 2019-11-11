@@ -28,7 +28,7 @@ gcloud compute addresses create jenkins-master --global
 
 kubectl apply -f jenkins-deployment.yaml
 kubectl apply -f jenkins-service.yaml
-#kubectl apply -f jenkins-ingress.yaml
+kubectl apply -f jenkins-ingress.yaml
 
 # find IP address of the application
 #kubectl get ingress
