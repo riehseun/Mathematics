@@ -7,7 +7,7 @@ kubectl delete ingress jenkins-ingress
 UM=$(gcloud compute url-maps list | awk '{print $1}' | tail -n 1)
 TP=$(sed "s/um/tp/g" <<<"$TP")
 echo "target proxies"
-gcloud -q compute url-maps delete $TP
+gcloud -q compute target-proxies delete $TP
 
 # Remove url maps
 echo "url map"
