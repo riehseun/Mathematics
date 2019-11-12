@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Remove ingress
-kubectl delete ingress jenkins-ingress
+#kubectl delete ingress jenkins-ingress
+kubectl delete ingress basic-ingress
 
 # Remove proxy
 
