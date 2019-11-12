@@ -59,7 +59,8 @@ spec:
         run: web
     spec:
       containers:
-      - image: riehseun/jenkins-master
+      # - image: riehseun/jenkins-master
+      - image: gcr.io/google-samples/hello-app:1.0
         imagePullPolicy: IfNotPresent
         name: web
         ports:
