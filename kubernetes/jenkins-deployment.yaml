@@ -1,67 +1,67 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: jenkins-master
-  namespace: default
-spec:
-  # replicas: 1
-  selector:
-    matchLabels:
-      run: jenkins-master
-  template:
-    metadata:
-      labels:
-        run: jenkins-master
-    spec:
-      containers:
-        # - image: riehseun/jenkins-master
-        - image: gcr.io/google-samples/hello-app:1.0
-          imagePullPolicy: "Always" # I want to use latest image all the time!
-          name: jenkins-master
-          # env:
-          #   - name: JAVA_OPTS
-          #     value: -Djenkins.install.runSetupWizard=false
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-            #   name: http-port
-            # - containerPort: 50000
-            #   protocol: TCP
-            #   name: jnlp-port
-          # If for some reason you don't want to serve a 200 at '/' you can instead setup a readinessProbe and the Health Check with inherit the path from there
-          # Once you add the readinessProbe, pods will not be considered ready until they are serving healthy http traffic on the checked port.
-          # readinessProbe:
-          #   httpGet:
-          #     path: /healthz
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 5
-      #     volumeMounts:
-      #       - name: jenkins-home
-      #         mountPath: /var/jenkins_home
-      # volumes:
-      #   - name: jenkins-home
-      #     emptyDir: {}
-
-
 # apiVersion: extensions/v1beta1
 # kind: Deployment
 # metadata:
-#   name: web
+#   name: jenkins-master
 #   namespace: default
 # spec:
+#   # replicas: 1
 #   selector:
 #     matchLabels:
-#       run: web
+#       run: jenkins-master
 #   template:
 #     metadata:
 #       labels:
-#         run: web
+#         run: jenkins-master
 #     spec:
 #       containers:
-#       - image: gcr.io/google-samples/hello-app:1.0
-#         imagePullPolicy: IfNotPresent
-#         name: web
-#         ports:
-#         - containerPort: 8080
-#           protocol: TCP
+#         - image: riehseun/jenkins-master
+#         # - image: gcr.io/google-samples/hello-app:1.0
+#           imagePullPolicy: "Always" # I want to use latest image all the time!
+#           name: jenkins-master
+#           # env:
+#           #   - name: JAVA_OPTS
+#           #     value: -Djenkins.install.runSetupWizard=false
+#           ports:
+#             - containerPort: 8080
+#               protocol: TCP
+#             #   name: http-port
+#             # - containerPort: 50000
+#             #   protocol: TCP
+#             #   name: jnlp-port
+#           # If for some reason you don't want to serve a 200 at '/' you can instead setup a readinessProbe and the Health Check with inherit the path from there
+#           # Once you add the readinessProbe, pods will not be considered ready until they are serving healthy http traffic on the checked port.
+#           # readinessProbe:
+#           #   httpGet:
+#           #     path: /healthz
+#           #     port: 80
+#           #   initialDelaySeconds: 5
+#           #   periodSeconds: 5
+#       #     volumeMounts:
+#       #       - name: jenkins-home
+#       #         mountPath: /var/jenkins_home
+#       # volumes:
+#       #   - name: jenkins-home
+#       #     emptyDir: {}
+
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      run: web
+  template:
+    metadata:
+      labels:
+        run: web
+    spec:
+      containers:
+      - image: riehseun/jenkins-master
+        imagePullPolicy: IfNotPresent
+        name: web
+        ports:
+        - containerPort: 8080
+          protocol: TCP
