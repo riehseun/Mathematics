@@ -1,8 +1,3 @@
-FROM jenkins/jenkins:lts
-#FROM jenkins:2.190.2
-
-LABEL maintainer="seungmoon.rieh@gmail.com"
-
 # ARG user=jenkins
 # ARG group=jenkins
 # ARG uid=1000
@@ -63,7 +58,15 @@ LABEL maintainer="seungmoon.rieh@gmail.com"
 
 # Skip initial setup
 # ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+
+
+
+
+FROM jenkins/jenkins:lts
+LABEL maintainer="seungmoon.rieh@gmail.com"
+
+#ENV PORT 8080
+
 # install plugins
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-# ENV CASC_JENKINS_CONFIG https://raw.githubusercontent.com/CodeBabel/JCasC-Demo/master/Jenkins-JCasC
+#COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+#RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
