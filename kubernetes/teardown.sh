@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Remove ingress
-#kubectl delete ingress jenkins-ingress
-kubectl delete ingress basic-ingress
+kubectl delete ingress jenkins-ingress
 
 # Remove proxy
 
@@ -35,8 +34,7 @@ for i in $HC; do
 done
 
 # Remove static IP
-#gcloud -q compute addresses delete jenkins-master --global
-gcloud -q compute addresses delete web-static-ip --global
+gcloud -q compute addresses delete jenkins-master --global
 
 # Remove cluster
 gcloud -q container clusters delete k8s
