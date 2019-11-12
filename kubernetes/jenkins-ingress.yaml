@@ -24,13 +24,13 @@ spec:
       #     servicePort: 8080
 
 
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: jenkins-ingress
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
-spec:
-  backend:
-    serviceName: web
-    servicePort: 8080
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: jenkins-ingress
+#   annotations:
+#     kubernetes.io/ingress.global-static-ip-name: "jenkins-master"
+# spec:
+#   backend:
+#     serviceName: web
+#     servicePort: 8080
