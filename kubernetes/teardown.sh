@@ -34,7 +34,8 @@ for i in $HC; do
 done
 
 # Remove static IP
-gcloud -q compute addresses delete jenkins-master --global
+#gcloud -q compute addresses delete jenkins-master --global
+gcloud -q compute addresses delete web-static-ip --global
 
 # Remove cluster
 gcloud -q container clusters delete k8s
