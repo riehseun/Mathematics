@@ -10,3 +10,5 @@ Worker node
 - pod (containers)
 - pod (containers)
 
+Deployments
+- replica set(s) -> pod(s)
