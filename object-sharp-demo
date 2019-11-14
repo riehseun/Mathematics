@@ -1,0 +1,12 @@
+Master node
+- API server (everything goes through here)
+- controller-manager (replication, namespace, serviceaccounts)
+- scheduler
+-> etcd (data is persisted)
+
+Worker node
+- kubelet
+- kube-proxy
+- pod (containers)
+- pod (containers)
+
