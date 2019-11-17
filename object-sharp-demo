@@ -12,3 +12,11 @@ Worker node
 
 Deployments
 - replica set(s) -> pod(s)
+
+inside container, try running
+- curl localhost:8080
+
+inside container, try running
+- curl [service_name]:8080
+
+
