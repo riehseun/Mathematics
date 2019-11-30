@@ -44,3 +44,6 @@ kubectl apply -f jenkins-ingress.yaml
 # gcloud compute backend-services list
 
 # kubectl patch svc jenkins-svc -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+
+
+# kubectl -n kube-system get po
