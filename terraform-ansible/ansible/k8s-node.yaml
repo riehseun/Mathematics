@@ -1,0 +1,93 @@
+---
+- name: Kubernetes node installation
+  hosts: all # value here is important!
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: set hostname of k8s-node
+      shell: hostnamectl set-hostname {{ lookup('env', 'HOSTNAME') }}
+
+    - name: exec bash
+      shell: exec bash
+
+    - name: setenforce 0
+      shell: setenforce 0
+
+    - name: disable selinux
+      shell: sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=10250/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=10255/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=30000-32767/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=6783/tcp
+
+    - name: reload firewall rule
+      shell: firewall-cmd --reload
+
+    - name: modprobe br_netfilter
+      shell: modprobe br_netfilter
+
+    - name: echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+      shell: echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+    - name: add k8s to yum reo
+      shell:
+        cmd: |
+            cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+            [kubernetes]
+            name=Kubernetes
+            baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+            enabled=1
+            gpgcheck=1
+            repo_gpgcheck=1
+            gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+            EOF
+
+    - name: install docker
+      shell: yum install docker -y
+
+    - name: restart docker=
+      shell: systemctl restart docker
+
+    - name: enable docker
+      shell: systemctl enable docker
+
+    - name: install kubeadm
+      shell: yum install kubeadm -y
+
+    - name: install kubectl
+      shell: yum install kubectl -y
+
+    - name: install kubelet
+      shell: yum install kubelet -y
+
+    - name: restart kubelet
+      shell: systemctl restart kubelet
+
+    - name: enable kubelet
+      shell: systemctl enable kubelet
+
+    - name: enable docker.service
+      shell: systemctl enable docker.service
+
+    - name: start docker.service
+      shell: systemctl start docker.service
+
+    - name: install kubernetes-cni
+      shell: yum install kubernetes-cni -y
+
+    - name: join current k8s-node to k8s-master
+      vars:
+        token: "{{ lookup('file', '../ansible/current-cluster/k8s-token.txt') }}"
+        ip: "{{ lookup('file', '../ansible/current-cluster/k8s-master-ip.txt') }}"
+      shell: "kubeadm join --token={{ token }} --discovery-token-unsafe-skip-ca-verification {{ ip }}:6443"
+

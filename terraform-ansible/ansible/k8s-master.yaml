@@ -1,0 +1,144 @@
+---
+- name: Kubernetes master installation
+  hosts: all # value here is important!
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+    - name: set hostname of k8s-master
+      shell: hostnamectl set-hostname {{ lookup('env', 'HOSTNAME') }}
+
+    - name: exec bash
+      shell: exec bash
+
+    - name: setenforce 0
+      shell: setenforce 0
+
+    - name: disable selinux
+      shell: sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=6443/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=2379-2380/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=10250/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=10251/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=10252/tcp
+
+    - name: set firewall rule
+      shell: firewall-cmd --permanent --add-port=10255/tcp
+
+    - name: reload firewall rule
+      shell: firewall-cmd --reload
+
+    - name: modprobe br_netfilter
+      shell: modprobe br_netfilter
+
+    - name: echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+      shell: echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+    - name: add k8s to yum reo
+      shell:
+        cmd: |
+            cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+            [kubernetes]
+            name=Kubernetes
+            baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+            enabled=1
+            gpgcheck=1
+            repo_gpgcheck=1
+            gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+            EOF
+
+    - name: install docker
+      shell: yum install docker -y
+
+    - name: restart docker
+      shell: systemctl restart docker
+
+    - name: enable docker
+      shell: systemctl enable docker
+
+    - name: install kubeadm
+      shell: yum install kubeadm -y
+
+    - name: install kubectl
+      shell: yum install kubectl -y
+
+    - name: install kubelet
+      shell: yum install kubelet -y
+
+    - name: restart kubelet
+      shell: systemctl restart kubelet
+
+    - name: enable kubelet
+      shell: systemctl enable kubelet
+
+    - name: install kubernetes-cni
+      shell: yum install kubernetes-cni -y
+
+    - name: initialize k8s
+      shell: kubeadm init
+      register: kubeadm_init_out
+
+    - name: create .kube file
+      shell: mkdir -p $HOME/.kube
+
+    - name: copy /etc/kubernetes/admin.conf to $HOME/.kube/config
+      shell: cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+    - name: chown $(id -u):$(id -g) $HOME/.kube/config
+      shell: chown $(id -u):$(id -g) $HOME/.kube/config
+
+    - name: set kube version as environment variable
+      shell: kubectl version | base64 | tr -d '\n'
+      register: kube_ver
+
+    - name: deploy network
+      shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version={{kube_ver.stdout}}"
+
+    - name: record ip address of k8s-master
+      shell: echo {{ lookup('env', 'PUBLIC_IP') }}
+      register: k8s_master_ip
+
+    - name: record k8s token
+      shell: kubeadm token list | cut -d ' ' -f1 | sed -n '2p'
+      register: k8s_token
+
+    - name: create local file with info returned by kubeadm init
+      local_action: copy content="{{ k8s_master_ip.stdout }}" dest="../ansible/current-cluster/k8s-master-ip.txt" # Destination directiry/file must be writable
+
+    - name: create local file with info returned by kubeadm init
+      local_action: copy content="{{ k8s_token.stdout }}" dest="../ansible/current-cluster/k8s-token.txt"
+
+    - name: install git
+      shell: yum install git -y
+
+    - name: prepare k8s setup
+      shell: cd /home/Rieh && git clone https://github.com/riehseun/kubernetes-docker-jenkins.git
+
+    - name: change line ending
+      shell: cd /home/Rieh/kubernetes-docker-jenkins/kubernetes && sed -i.bak 's/\r$//' k8s.sh
+
+    # - name: Jenkins X
+    #   sheel: mkdir -p ~/.jx/bin
+
+    # - name: Jenkins X
+    #   sheel: curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.2/jx-linux-amd64.tar.gz | tar xzv -C ~/.jx/bin
+
+    # - name: Jenkins X
+    #   sheel: export PATH=$PATH:~/.jx/bin
+
+    # - name: Jenkins X
+    #   sheel: echo 'export PATH=$PATH:~/.jx/bin' >> ~/.bashrc
+
+    # - name: install helm
+    #   shell: yum install kubernetes-helm -y

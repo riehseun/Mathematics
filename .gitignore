@@ -1,3 +1,4 @@
-*.tar
-*.tar.gz
-helm
+main/.terraform
+main/terraform.exe
+main/terraform.tfstate
+main/terraform.tfstate.backup
